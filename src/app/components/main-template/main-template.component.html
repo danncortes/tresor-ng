@@ -1,0 +1,12 @@
+<div class="main-container">
+  <div [ngClass]="{'login-container': isLoginRoute(), 'app-container': !isLoginRoute()}">
+    <div class="card shadow">
+      <div class="card-header">
+        <h5 class="mb-0">TRESOR</h5>
+      </div>
+      <article class="card-body p-0">
+        <router-outlet></router-outlet>
+      </article>
+    </div>
+  </div>
+</div>

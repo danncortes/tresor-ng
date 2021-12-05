@@ -1,0 +1,62 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 25% 75%;
+
+  .left {
+    .title {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+
+.vaults {
+  li {
+    margin-bottom: .4rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    button {
+      width: 100%;
+      background-color: rgba(0,0,0,0.08);
+      border: 0;
+      font-size: .9rem;
+      padding: 3px 12px;
+      border-radius: 100vh;
+      text-align: left;
+      color: rgba(0,0,0,.5);
+
+      &.active {
+        background-color: $gray-500;
+        color: rgba(0,0,0,.7);
+      }
+    }
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  button {
+    background-color: rgba(0,0,0,0.08);
+    border: 0;
+    font-size: .9rem;
+    padding: 3px 12px;
+    border-radius: 100vh;
+    margin-right: .4rem;
+    margin-bottom: .4rem;
+    color: rgba(0,0,0,.5);
+
+    &.active {
+      background-color: $gray-500;
+      color: rgba(0,0,0,.7);
+    }
+  }
+}

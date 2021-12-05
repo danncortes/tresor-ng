@@ -1,0 +1,12 @@
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: #333;
+}
+
+.main-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

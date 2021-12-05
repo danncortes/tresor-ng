@@ -1,0 +1,45 @@
+
+    <a href="" class="float-right btn btn-outline-primary">Register</a>
+    <h5 class="card-title mb-4 mt-1">Login</h5>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          class="form-control"
+          type="email"
+          formControlName="email"
+          required
+          email
+        >
+      </div>
+      <div class="form-group">
+        <a class="float-right" href="#" tabindex="-1">Forgot?</a>
+        <label for="email">Password</label>
+        <input
+          id="password"
+          class="form-control"
+          type="password"
+          formControlName="password"
+          required
+        >
+      </div>
+      <div class="form-group">
+        <a class="float-right" href="#" tabindex="-1">Forgot?</a>
+        <label for="master-password">Master Password</label>
+        <input
+          id="master-password"
+          class="form-control"
+          type="password"
+          formControlName="masterPassword"
+          required
+        >
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="formError">
+        There was a problem logging in
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Login</button>
+      </div>
+      <a routerLink="/dashboard">dashboard</a>
+    </form>
