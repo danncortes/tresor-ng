@@ -19,6 +19,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ProfileComponent } from './components/profile/profile.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { CredentialsListComponent } from './components/credentials-list/credentials-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AuthInterceptor } from './auth.interceptor';
     ResetPasswordComponent,
     ForgotPasswordComponent,
     ProfileComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    CredentialsListComponent
   ],
   imports: [
     BrowserModule,

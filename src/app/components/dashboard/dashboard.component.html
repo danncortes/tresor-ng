@@ -32,11 +32,7 @@
     </div>
     <div class="pd-3">
       <p *ngIf="isLoading">Loading...</p>
-      <ul *ngIf="!isLoading">
-        <li *ngFor="let credential of credentials">
-          {{credential.name}}
-        </li>
-      </ul>
+      <app-credentials-list *ngIf="!isLoading"></app-credentials-list>
     </div>
 
   </div>
