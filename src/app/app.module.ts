@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { CredentialsListComponent } from './components/credentials-list/credentials-list.component';
+import { CredentialListItemComponent } from './components/credential-list-item/credential-list-item.component';
+import { CredentialFormComponent } from './components/credential-form/credential-form.component';
+import { CreateNewCredentialModalComponent } from './components/create-new-credential-modal/create-new-credential-modal.component';
+import { CredentialFormFieldComponent } from './components/credential-form-field/credential-form-field.component';
+import { ChipsComponent } from './components/chips/chips.component';
 
 @NgModule({
   declarations: [
@@ -36,14 +41,20 @@ import { CredentialsListComponent } from './components/credentials-list/credenti
     ForgotPasswordComponent,
     ProfileComponent,
     WelcomeComponent,
-    CredentialsListComponent
+    CredentialsListComponent,
+    CredentialListItemComponent,
+    CredentialFormComponent,
+    CreateNewCredentialModalComponent,
+    CredentialFormFieldComponent,
+    ChipsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {

@@ -27,8 +27,9 @@
     </div>
   </div>
   <div class="main">
-    <div class="filter-bar">
+    <div class="top-bar">
       <span>Filter:</span>
+      <button (click)="openCreateNewModal()">Add</button>
     </div>
     <div class="pd-3">
       <p *ngIf="isLoading">Loading...</p>
