@@ -1,0 +1,21 @@
+<div class="chips-component rounded border pt-2 pr-2 pl-2 mb-3">
+    <div class="chip-list d-flex flex-wrap">
+        <div
+                class="chip mr-2 mb-2 rounded-pill d-flex align-items-center"
+                *ngFor="let chip of chips; let i = index;">
+            <span>{{chip}}</span>
+            <div class="x-button rounded-pill position-relative" (click)="removeChip(i)">
+                <span>
+                    +
+                </span>
+            </div>
+        </div>
+        <input
+                class="mb-2"
+                type="text"
+                (keydown.enter)="addChip($event)"
+                value="123"
+                [(ngModel)]="newChip"
+                placeholder="Type and press enter to add tags">
+    </div>
+</div>

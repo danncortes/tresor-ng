@@ -1,0 +1,47 @@
+.chips-component {
+
+  input, input:focus, input:active, input:focus-visible {
+    border: none;
+    background: none;
+    outline: none;
+    box-shadow: none;
+    height: 30px;
+    flex-grow: 1;
+  }
+
+  input::placeholder {
+    font-size: .9rem;
+  }
+
+  input {
+    color: #444444;
+  }
+}
+
+.chip {
+  background-color: rgba(0,0,0,0.08);
+  padding: .2rem .4rem .2rem .8rem;
+  font-size: .9rem;
+
+  & > span {
+    margin-right: .4rem;
+  }
+
+  .x-button {
+    width: 18px;
+    height: 18px;
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
+
+    & > span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-45%, -50%) rotate(45deg);
+      font-size: 1.1rem;
+      opacity: .5;
+      line-height: .8rem;
+    }
+  }
+
+}
