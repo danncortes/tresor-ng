@@ -8,6 +8,14 @@
     height: 30px;
     flex-grow: 1;
   }
+
+  input::placeholder {
+    font-size: .9rem;
+  }
+
+  input {
+    color: #444444;
+  }
 }
 
 .chip {

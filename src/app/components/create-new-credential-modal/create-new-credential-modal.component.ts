@@ -1,34 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Credential, CredentialForm, Field } from '../../models/credential.model';
+import {Component, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {CredentialForm, Field} from '../../models/credential.model';
+import {CredentialService} from "../../services/credential.service";
+import {UserService} from "../../services/user.service";
 
 @Component({
-  selector: 'app-create-new-credential-modal',
-  templateUrl: './create-new-credential-modal.component.html',
-  styleUrls: ['./create-new-credential-modal.component.scss']
+    selector: 'app-create-new-credential-modal',
+    templateUrl: './create-new-credential-modal.component.html',
+    styleUrls: ['./create-new-credential-modal.component.scss']
 })
 export class CreateNewCredentialModalComponent implements OnInit {
 
-  constructor(public activeModal: NgbActiveModal) { }
+    constructor(
+        public activeModal: NgbActiveModal,
+        public credentialService: CredentialService,
+        public userService: UserService
+    ) {
+    }
 
-  emptyField: Field = {
-    name: '',
-    data: '',
-    type: 'username'
-  }
+    emptyField: Field = {
+        name: '',
+        data: '',
+        type: 'username'
+    }
 
-  newCredential: CredentialForm = {
-    name: '',
-    data: [{
-      ...this.emptyField
-    }],
-    tags: ['bank', 'colombia']
-  }
+    newCredential: CredentialForm = {
+        name: '',
+        data: [{
+            ...this.emptyField
+        }],
+        tags: []
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  public createCredential(): void {
-    console.log(this.newCredential);
-  }
+    public createCredential(): void {
+        this.credentialService.createCredentials(this.newCredential)
+        this.userService.addRemoveTags(this.credentialService.credentialChipLog)
+        this.credentialService.resetChipsLog()
+        this.activeModal.close()
+    }
 }

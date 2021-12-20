@@ -4,7 +4,16 @@ export interface CredentialForm {
   tags: string[];
 }
 
-export interface Credential extends CredentialForm{
+export interface CredentialCrypt {
+  name: string;
+  data: string;
+  tags: string[];
+}
+
+export interface Credential{
+  name: string;
+  data: string;
+  tags: string[];
   _id: number;
   createdAt: string;
   updatedAt: string;

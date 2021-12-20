@@ -8,7 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginRegisterComponent } from './components/login-register/login-register.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
-import { FormComponent } from './components/form/form.component';
 import { MainTemplateComponent } from './components/main-template/main-template.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -25,6 +24,7 @@ import { CredentialFormComponent } from './components/credential-form/credential
 import { CreateNewCredentialModalComponent } from './components/create-new-credential-modal/create-new-credential-modal.component';
 import { CredentialFormFieldComponent } from './components/credential-form-field/credential-form-field.component';
 import { ChipsComponent } from './components/chips/chips.component';
+import { CryptDecryptInterceptor } from "./interceptors/crypt-decrypt.interceptor";
 
 @NgModule({
   declarations: [
@@ -32,7 +32,6 @@ import { ChipsComponent } from './components/chips/chips.component';
     LoginRegisterComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    FormComponent,
     MainTemplateComponent,
     DashboardComponent,
     NoVerifiedComponent,
@@ -59,6 +58,9 @@ import { ChipsComponent } from './components/chips/chips.component';
   providers: [
     {
       provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: CryptDecryptInterceptor, multi: true
     }
   ],
   bootstrap: [AppComponent]

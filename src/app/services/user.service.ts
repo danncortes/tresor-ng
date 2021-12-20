@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { AuthCredentials, User } from '../models/user.model';
 import { TokenService } from './token.service';
 import { Router } from '@angular/router';
+import {ChipLog} from "../components/chips/chips.component";
 
 const { apiUrl } = environment;
 
@@ -27,6 +28,8 @@ export class UserService {
     this.http.post(`${apiUrl}/user/login`, authCredentials).subscribe((response: any) => {
       const { token } = response as { token: string };
       this.tokenService.saveToken(token);
+      window.sessionStorage.setItem('masterp', authCredentials.masterPassword);
+
       $req.next();
     },
     (err) => {
@@ -49,6 +52,10 @@ export class UserService {
       $req.error(err);
     });
     return $req;
+  }
+
+  public addRemoveTags(chipLog: ChipLog): void {
+    this.http.patch(`${apiUrl}/user/add-remove-tags`, chipLog).subscribe(() => {});
   }
 
   public canContinue(path: string): Observable<boolean> {
