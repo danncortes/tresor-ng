@@ -1,0 +1,30 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.vaults {
+  li {
+    button {
+      width: 100%;
+      background-color: $gray-200;
+      border: 0;
+      font-size: .9rem;
+      padding: 3px 12px;
+      border-radius: 100vh;
+      text-align: left;
+      color: rgba(0,0,0,.5);
+      box-sizing: border-box;
+
+      &.active {
+        background-color: $gray-400;
+        color: rgba(0,0,0,.8);
+        outline: 1px solid rgba(0,0,0,0.06);;
+        outline-offset: -1px;
+      }
+    }
+  }
+}
+
+.manage-vaults-btn {
+  font-size: 0.8rem;
+}

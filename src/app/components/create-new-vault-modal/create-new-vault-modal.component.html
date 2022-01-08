@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h5 class="modal-title">Create Vault</h5>
+    <button
+            type="button"
+            class="close p-0 m-0"
+            aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')"
+            [disabled]="isCreating">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <input
+            type="text"
+            #vaultNameInput
+            [(ngModel)]="vaultName"
+            class="form-control form-control-sm"
+            placeholder="Type vault name"
+            (keyup.enter)="createNewVault()">
+</div>
+<div class="modal-footer">
+    <button
+            type="button"
+            class="btn btn-sm btn-outline-dark"
+            (click)="activeModal.close('Close click')"
+            [disabled]="isCreating">
+        Cancel
+    </button>
+    <button
+            type="button" class="btn btn-sm btn-primary"
+            [disabled]="!vaultName || isCreating"
+            (click)="createNewVault()">
+        <ng-template [ngIf]="isCreating">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Saving...
+        </ng-template>
+        <ng-template [ngIf]="!isCreating">
+            Create
+        </ng-template>
+    </button>
+</div>

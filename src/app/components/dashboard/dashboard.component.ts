@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CredentialService } from '../../services/credential.service';
-import { Credential } from '../../models/credential.model';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateNewCredentialModalComponent } from '../create-new-credential-modal/create-new-credential-modal.component';
 
@@ -18,10 +17,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.credentialService.getCredentials();
-  }
-
-  public get credentials(): Credential[] {
-    return this.credentialService.credentials$.getValue();
   }
 
   public get isLoading(): boolean {

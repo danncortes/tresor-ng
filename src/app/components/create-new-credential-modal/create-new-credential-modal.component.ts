@@ -29,7 +29,8 @@ export class CreateNewCredentialModalComponent implements OnInit {
         data: [{
             ...this.emptyField
         }],
-        tags: []
+        tags: [],
+        vault: null
     }
 
     ngOnInit(): void {

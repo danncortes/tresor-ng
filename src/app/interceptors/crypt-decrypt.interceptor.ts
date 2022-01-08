@@ -30,12 +30,12 @@ export class CryptDecryptInterceptor implements HttpInterceptor {
             const masterp = request.headers.get('masterp');
 
             if (request.body && masterp) {
-                request.clone({
+                return next.handle(request.clone({
                     body: {
                         ...request.body,
                         data: cryptDataObj(request.body.data, masterp)
                     }
-                })
+                }))
             }
 
         }

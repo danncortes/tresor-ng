@@ -11,8 +11,8 @@ export class CredentialsListComponent {
 
   constructor(public credentialService: CredentialService) { }
 
-  public get credentials(): Credential[] {
-    return this.credentialService.credentials$.value;
+  public get credentials(): Credential[] | null {
+    return this.credentialService.filteredCredentials$.getValue();
   }
 
 }

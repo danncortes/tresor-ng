@@ -1,0 +1,22 @@
+<div class="header d-flex justify-content-between">
+    <h4 class="title">
+        Vaults
+    </h4>
+
+    <button class="btn btn-sm" (click)="openCreateNewVaultModal()">+</button>
+</div>
+<ul class="vaults m-0 p-0 list-unstyled">
+    <li class="mb-2" >
+        <button [class.active]="isActive(null)" (click)="selectVault(null)">
+            All
+        </button>
+    </li>
+    <li class="mb-2" *ngFor="let vault of vaults">
+        <button [class.active]="isActive(vault._id!)" (click)="selectVault(vault._id!)">
+            {{vault.label}}
+        </button>
+    </li>
+</ul>
+    <div class="btn btn-link btn-sm manage-vaults-btn p-0 mb-3"
+         routerLink="/vaults"
+    >Manage</div>

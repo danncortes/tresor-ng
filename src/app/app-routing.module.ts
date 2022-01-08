@@ -10,6 +10,7 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import {VaultsComponent} from "./components/vaults/vaults.component";
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'vaults',
+        component: VaultsComponent,
         canActivate: [AuthGuard]
       },
       {

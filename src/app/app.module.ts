@@ -25,6 +25,10 @@ import { CreateNewCredentialModalComponent } from './components/create-new-crede
 import { CredentialFormFieldComponent } from './components/credential-form-field/credential-form-field.component';
 import { ChipsComponent } from './components/chips/chips.component';
 import { CryptDecryptInterceptor } from "./interceptors/crypt-decrypt.interceptor";
+import { VaultsMenuComponent } from './components/vaults-menu/vaults-menu.component';
+import { CreateNewVaultModalComponent } from './components/create-new-vault-modal/create-new-vault-modal.component';
+import { VaultsComponent } from './components/vaults/vaults.component';
+import { VaultListItemComponent } from './components/vault-list-item/vault-list-item.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { CryptDecryptInterceptor } from "./interceptors/crypt-decrypt.intercepto
     CredentialFormComponent,
     CreateNewCredentialModalComponent,
     CredentialFormFieldComponent,
-    ChipsComponent
+    ChipsComponent,
+    VaultsMenuComponent,
+    CreateNewVaultModalComponent,
+    VaultsComponent,
+    VaultListItemComponent
   ],
   imports: [
     BrowserModule,
