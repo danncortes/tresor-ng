@@ -1,19 +1,21 @@
-export interface CredentialForm {
+import {Vault} from "./user.model";
+
+export interface CredentialBase {
+  vault: Vault["_id"] | null;
   name: string;
+  tags: string[];
+
+}
+
+export interface CredentialForm extends CredentialBase {
   data: Field[];
-  tags: string[];
 }
 
-export interface CredentialCrypt {
-  name: string;
+export interface CredentialCrypt extends CredentialBase {
   data: string;
-  tags: string[];
 }
 
-export interface Credential{
-  name: string;
-  data: string;
-  tags: string[];
+export interface Credential extends CredentialCrypt {
   _id: number;
   createdAt: string;
   updatedAt: string;
