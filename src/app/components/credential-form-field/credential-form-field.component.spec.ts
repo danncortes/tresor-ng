@@ -10,7 +10,7 @@ describe('CredentialFormFieldComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CredentialFormFieldComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

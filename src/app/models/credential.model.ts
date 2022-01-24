@@ -1,7 +1,7 @@
-import {Vault} from "./user.model";
+import { Vault } from './user.model';
 
 export interface CredentialBase {
-  vault: Vault["_id"] | null;
+  vault: Vault['_id'] | null;
   name: string;
   tags: string[];
 

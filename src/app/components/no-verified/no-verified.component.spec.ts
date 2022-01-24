@@ -10,7 +10,7 @@ describe('NoVerifiedComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ NoVerifiedComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

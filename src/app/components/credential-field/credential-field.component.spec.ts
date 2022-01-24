@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VaultsComponent } from './vaults.component';
+import { CredentialFieldComponent } from './credential-field.component';
 
-describe('VaultsComponent', () => {
-  let component: VaultsComponent;
-  let fixture: ComponentFixture<VaultsComponent>;
+describe('CredentialFieldComponent', () => {
+  let component: CredentialFieldComponent;
+  let fixture: ComponentFixture<CredentialFieldComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VaultsComponent ]
+      declarations: [ CredentialFieldComponent ]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VaultsComponent);
+    fixture = TestBed.createComponent(CredentialFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

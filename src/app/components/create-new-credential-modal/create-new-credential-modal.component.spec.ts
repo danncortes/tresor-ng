@@ -10,7 +10,7 @@ describe('CreateNewCredentialModalComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CreateNewCredentialModalComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
