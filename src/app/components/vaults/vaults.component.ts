@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../services/user.service";
-import {Vault} from "../../models/user.model";
-import {CredentialService} from "../../services/credential.service";
+import { UserService } from '../../services/user.service';
+import { Vault } from '../../models/user.model';
+import { CredentialService } from '../../services/credential.service';
 
 @Component({
   selector: 'app-vaults',
@@ -23,10 +23,10 @@ export class VaultsComponent implements OnInit {
   }
 
   public get isCredentialsFetch(): boolean {
-    return this.credentialService.credentials$.value !== null
+    return this.credentialService.credentials$.value !== null;
   }
 
   public credentialNumber(vaultId: Vault['_id']): number {
-    return this.credentialService.credentialsPerVaultSummary[vaultId!]
+    return this.credentialService.credentialsPerVaultSummary[vaultId!];
   }
 }

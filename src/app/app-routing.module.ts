@@ -10,7 +10,7 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import {VaultsComponent} from "./components/vaults/vaults.component";
+import { VaultsComponent } from './components/vaults/vaults.component';
 
 const routes: Routes = [
   {

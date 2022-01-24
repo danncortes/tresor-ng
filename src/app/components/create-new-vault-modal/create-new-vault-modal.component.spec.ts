@@ -10,7 +10,7 @@ describe('CreateNewVaultModalComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CreateNewVaultModalComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

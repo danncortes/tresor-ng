@@ -10,7 +10,7 @@ describe('MainTemplateComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ MainTemplateComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

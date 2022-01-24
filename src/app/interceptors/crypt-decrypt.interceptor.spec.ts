@@ -6,7 +6,7 @@ describe('CryptDecryptInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       CryptDecryptInterceptor
-      ]
+    ]
   }));
 
   it('should be created', () => {

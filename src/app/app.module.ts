@@ -24,11 +24,12 @@ import { CredentialFormComponent } from './components/credential-form/credential
 import { CreateNewCredentialModalComponent } from './components/create-new-credential-modal/create-new-credential-modal.component';
 import { CredentialFormFieldComponent } from './components/credential-form-field/credential-form-field.component';
 import { ChipsComponent } from './components/chips/chips.component';
-import { CryptDecryptInterceptor } from "./interceptors/crypt-decrypt.interceptor";
+import { CryptDecryptInterceptor } from './interceptors/crypt-decrypt.interceptor';
 import { VaultsMenuComponent } from './components/vaults-menu/vaults-menu.component';
 import { CreateNewVaultModalComponent } from './components/create-new-vault-modal/create-new-vault-modal.component';
 import { VaultsComponent } from './components/vaults/vaults.component';
 import { VaultListItemComponent } from './components/vault-list-item/vault-list-item.component';
+import { CredentialFieldComponent } from './components/credential-field/credential-field.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { VaultListItemComponent } from './components/vault-list-item/vault-list-
     VaultsMenuComponent,
     CreateNewVaultModalComponent,
     VaultsComponent,
-    VaultListItemComponent
+    VaultListItemComponent,
+    CredentialFieldComponent
   ],
   imports: [
     BrowserModule,
@@ -73,4 +75,5 @@ import { VaultListItemComponent } from './components/vault-list-item/vault-list-
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

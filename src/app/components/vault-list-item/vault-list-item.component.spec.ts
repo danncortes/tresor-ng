@@ -10,7 +10,7 @@ describe('VaultListItemComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ VaultListItemComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

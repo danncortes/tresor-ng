@@ -10,7 +10,7 @@ describe('VaultsMenuComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ VaultsMenuComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

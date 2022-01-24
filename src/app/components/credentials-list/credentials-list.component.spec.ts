@@ -10,7 +10,7 @@ describe('CredentialsListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CredentialsListComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
