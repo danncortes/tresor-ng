@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, filter, iif, map, Observable, of, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Subject } from 'rxjs';
 import { Credential, CredentialForm } from '../models/credential.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -51,11 +51,15 @@ export class CredentialService {
     };
 
     for(const vault of vaults) {
-      summary[`${vault._id}`] = 0;
+      if(vault._id) {
+        summary[vault._id] = 0;
+      }
     }
 
     for(const credential of credentials) {
-      summary[`${credential.vault}`]++;
+      if(credential.vault) {
+        summary[credential.vault]++;
+      }
     }
 
     return summary;

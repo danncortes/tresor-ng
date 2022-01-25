@@ -23,7 +23,7 @@ export class CredentialFormComponent implements OnInit {
 
     ngOnInit(): void {
       this.credentialName = new FormControl(this.credential.name);
-      this.credentialName.valueChanges.subscribe((value) => {
+      this.credentialName.valueChanges.subscribe((value: string) => {
         this.credential.name = value;
         this.credentialChange.emit(this.credential);
       });
@@ -39,7 +39,16 @@ export class CredentialFormComponent implements OnInit {
     }
 
     public get vaultDropdownLabel(): string {
-      return this.selectedVault$.value ? this.vaults.find(vault => vault._id === this.selectedVault$.value)!.label : 'None';
+      let label = 'None';
+
+      if(this.selectedVault$.value) {
+        const selectedVault = this.vaults.find(vault => vault._id === this.selectedVault$.value);
+
+        if(selectedVault) {
+          label = selectedVault.label;
+        }
+      }
+      return label;
     }
 
     public get vaults(): Vault[] {
@@ -62,7 +71,7 @@ export class CredentialFormComponent implements OnInit {
       this.selectedVault$.next(vaultId);
     }
 
-    trackByFn(index: number, item: any): number {
+    trackByFn(index: number): number {
       return index;
     }
 }

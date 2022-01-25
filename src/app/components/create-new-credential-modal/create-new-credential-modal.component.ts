@@ -1,17 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CredentialForm, Field } from '../../models/credential.model';
 import { CredentialService } from '../../services/credential.service';
 import { UserService } from '../../services/user.service';
-import { forkJoin, merge, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-new-credential-modal',
   templateUrl: './create-new-credential-modal.component.html',
   styleUrls: ['./create-new-credential-modal.component.scss']
 })
-export class CreateNewCredentialModalComponent implements OnInit, OnDestroy {
+export class CreateNewCredentialModalComponent implements OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
@@ -36,9 +36,6 @@ export class CreateNewCredentialModalComponent implements OnInit, OnDestroy {
     tags: [],
     vault: null
   };
-
-  ngOnInit(): void {
-  }
 
   public createCredential(): void {
     this.subscriptions.push(

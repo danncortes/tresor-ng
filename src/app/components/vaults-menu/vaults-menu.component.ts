@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { User, Vault } from '../../models/user.model';
+import { Component } from '@angular/core';
+import { Vault } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { CreateNewVaultModalComponent } from '../create-new-vault-modal/create-new-vault-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,12 +9,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './vaults-menu.component.html',
   styleUrls: ['./vaults-menu.component.scss']
 })
-export class VaultsMenuComponent implements OnInit {
+export class VaultsMenuComponent {
 
   constructor(public userService: UserService, public modalService: NgbModal) {
-  }
-
-  ngOnInit(): void {
   }
 
   public get vaults(): Vault[] {

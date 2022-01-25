@@ -1,8 +1,8 @@
-import { Component, ElementRef, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild } from '@angular/core';
 import { Credential, Field } from '../../models/credential.model';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
-import { cryptDataObj, decryptDataObj } from '../../utils/cryptDecrypt';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { decryptDataObj } from '../../utils/cryptDecrypt';
+import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -10,19 +10,12 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './credential-list-item.component.html',
   styleUrls: ['./credential-list-item.component.scss']
 })
-export class CredentialListItemComponent implements OnInit, AfterViewInit {
+export class CredentialListItemComponent implements AfterViewInit {
 
     @ViewChild('collapse') collapse: NgbCollapse;
     @Input() credential: Credential;
     public isCollapsed = true;
     public decryptedData: null | Field[];
-
-    public constructor() {
-    }
-
-    ngOnInit(): void {
-
-    }
 
     ngAfterViewInit() {
       this.collapse.hidden.subscribe(() => {

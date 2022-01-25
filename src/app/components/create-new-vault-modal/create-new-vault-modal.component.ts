@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../services/user.service';
 
@@ -8,9 +8,9 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./create-new-vault-modal.component.scss']
 })
 
-export class CreateNewVaultModalComponent implements OnInit, AfterViewInit {
+export class CreateNewVaultModalComponent implements AfterViewInit {
 
-    @ViewChild('vaultNameInput') public vaultNameInput: ElementRef;
+    @ViewChild('vaultNameInput') public vaultNameInput: ElementRef<HTMLInputElement>;
     public vaultName = '';
     public isCreating = false;
 
@@ -18,9 +18,6 @@ export class CreateNewVaultModalComponent implements OnInit, AfterViewInit {
         public activeModal: NgbActiveModal,
         public userService: UserService
     ) {
-    }
-
-    ngOnInit(): void {
     }
 
     ngAfterViewInit(): void {

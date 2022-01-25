@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Field } from '../../models/credential.model';
 
 @Component({
@@ -6,13 +6,8 @@ import { Field } from '../../models/credential.model';
   templateUrl: './credential-field.component.html',
   styleUrls: ['./credential-field.component.scss']
 })
-export class CredentialFieldComponent implements OnInit {
+export class CredentialFieldComponent {
 
   @Input() field: Field;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

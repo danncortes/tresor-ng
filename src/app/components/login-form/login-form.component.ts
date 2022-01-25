@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -29,7 +29,7 @@ export class LoginFormComponent {
     this.userService.login(this.loginForm.value).subscribe(() => {
       this.formError = false;
       void this.router.navigateByUrl('');
-    }, (err) => {
+    }, () => {
       this.formError = true;
     });
   }

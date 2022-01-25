@@ -70,15 +70,15 @@ export class UserService {
 
   public createVault(vaultName: string): Observable<unknown> {
     const req$ = new Subject<void>();
-    let { _id, email, ...newUser } = this.user;
+    const { _id, email, ...user } = this.user;
     const newVault: Vault = {
       label: vaultName
     };
 
-    newUser = {
-      ...newUser,
+    const newUser = {
+      ...user,
       vaults: [
-        ...newUser.vaults,
+        ...user.vaults,
         newVault
       ]
     };
@@ -94,8 +94,11 @@ export class UserService {
 
         req$.next();
 
-        const newVaultId = user.vaults.find(vault => vault.label === newVault.label)!._id;
-        this.selectedVault$.next(newVaultId!);
+        const newVaultId = user.vaults.find(vault => vault.label === newVault.label)?._id;
+
+        if(newVaultId) {
+          this.selectedVault$.next(newVaultId);
+        }
       }
     });
 
