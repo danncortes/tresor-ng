@@ -36,7 +36,7 @@ export class CredentialListItemComponent implements AfterViewInit {
         this.decryptedData = data;
         setTimeout(() => {
           this.collapse.toggle(true);
-        },0);
+        }, 0);
       }, error => {
         console.log(error);
       });
@@ -48,6 +48,16 @@ export class CredentialListItemComponent implements AfterViewInit {
 
     public decryptData(): Observable<any> {
       return of(sessionStorage.getItem('masterp')).pipe(switchMap((masterp) => of(decryptDataObj(this.credential.data, masterp!))));
+    }
+
+    get updateDate(): string {
+      const date = new Date(this.credential.updatedAt);
+      return date.toLocaleDateString('en', {
+        weekday: 'short', // possible values: 'long', 'short', 'narrow'
+        year: 'numeric', // possible values: 'numeric', '2-digit'
+        month: 'short', // possible values: 'numeric', '2-digit', 'long', 'short', 'narrow'
+        day: 'numeric' // possible values: 'numeric', '2-digit'
+      });
     }
 
 

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Credential } from '../../models/credential.model';
-import { CredentialService } from '../../services/credential.service';
 
 @Component({
   selector: 'app-credentials-list',
@@ -9,10 +8,6 @@ import { CredentialService } from '../../services/credential.service';
 })
 export class CredentialsListComponent {
 
-  constructor(public credentialService: CredentialService) { }
-
-  public get credentials(): Credential[] | null {
-    return this.credentialService.filteredCredentials$.getValue();
-  }
+  @Input() credentials: Credential[];
 
 }

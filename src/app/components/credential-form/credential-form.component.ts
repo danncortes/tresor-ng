@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CredentialForm } from '../../models/credential.model';
 import { FormControl } from '@angular/forms';
 import { CredentialService } from '../../services/credential.service';
@@ -11,14 +11,18 @@ import { UserService } from '../../services/user.service';
   templateUrl: './credential-form.component.html',
   styleUrls: ['./credential-form.component.scss']
 })
-export class CredentialFormComponent implements OnInit {
+export class CredentialFormComponent implements OnInit{
 
     @Input() credential: CredentialForm;
     @Output() credentialChange = new EventEmitter<CredentialForm>();
+
     credentialName: FormControl;
     selectedVault$: BehaviorSubject<Vault['_id'] | null> = new BehaviorSubject<Vault['_id'] | null>(null);
 
-    constructor(public credentialService: CredentialService, public userService: UserService) {
+    constructor(
+        public credentialService: CredentialService,
+        public userService: UserService
+    ) {
     }
 
     ngOnInit(): void {
@@ -35,7 +39,11 @@ export class CredentialFormComponent implements OnInit {
         }
       });
 
-      this.selectedVault$.next(this.userService.selectedVault$.value);
+      this.selectedVault$.next(this.credentialService.selectedVault$.value);
+    }
+
+    public get userTags(): string[] {
+      return Object.keys(this.userService.user.tags);
     }
 
     public get vaultDropdownLabel(): string {

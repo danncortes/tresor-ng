@@ -1,0 +1,32 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  button {
+    border: 0;
+    font-size: .8rem;
+    border-radius: 100vh;
+    margin-right: .4rem;
+    margin-bottom: .4rem;
+    color: rgba(0,0,0,.5);
+    background-color: #e9ecef;
+    padding: 2px 12px;
+    text-align: left;
+    box-sizing: border-box;
+
+
+    &.active {
+      background-color: $gray-400;
+      color: rgba(0, 0, 0, .8);
+    }
+  }
+
+  .no-tags {
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+}

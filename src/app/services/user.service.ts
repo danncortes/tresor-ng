@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthCredentials, BaseUser, User, Vault } from '../models/user.model';
 import { TokenService } from './token.service';
@@ -14,7 +14,6 @@ const { apiUrl } = environment;
 export class UserService {
 
   public user: User;
-  public selectedVault$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   constructor(private http: HttpClient, public tokenService: TokenService, public router: Router) {
   }
@@ -68,8 +67,8 @@ export class UserService {
     this.saveUser(user).subscribe();
   }
 
-  public createVault(vaultName: string): Observable<unknown> {
-    const req$ = new Subject<void>();
+  public createVault(vaultName: string): Observable<Vault['_id']> {
+    const req$ = new Subject<Vault['_id']>();
     const { _id, email, ...user } = this.user;
     const newVault: Vault = {
       label: vaultName
@@ -92,13 +91,9 @@ export class UserService {
           ]
         };
 
-        req$.next();
-
         const newVaultId = user.vaults.find(vault => vault.label === newVault.label)?._id;
 
-        if(newVaultId) {
-          this.selectedVault$.next(newVaultId);
-        }
+        req$.next(newVaultId);
       }
     });
 
@@ -121,7 +116,8 @@ export class UserService {
         $req.next(true);
       }
     }, () => {
-      void this.router.navigateByUrl('login');
+      this.tokenService.signOut();
+      void this.router.navigateByUrl('/login');
       $req.next(false);
     });
 

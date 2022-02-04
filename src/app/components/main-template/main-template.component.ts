@@ -15,4 +15,8 @@ export class MainTemplateComponent {
   public isLoginRoute() {
     return this.router.url === '/login';
   }
+
+  public get showMenu():boolean {
+    return this.router.url !== '/login';
+  }
 }

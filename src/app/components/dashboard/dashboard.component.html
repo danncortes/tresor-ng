@@ -1,25 +1,23 @@
 <div class="dashboard">
   <div class="left p-3 bg-light border-right">
-
     <app-vaults-menu></app-vaults-menu>
-    <h4 class="title">
-      Tags
-    </h4>
-
-    <div class="tags">
-      <button class="active">Banks</button>
-      <button>login</button>
-      <button>social</button>
-    </div>
+    <app-tags></app-tags>
   </div>
   <div class="main">
-    <div class="top-bar">
-      <span>Filter:</span>
-      <button class="btn btn-primary btn-sm" (click)="openCreateNewModal()"><i class="bi bi-plus-lg"></i></button>
+    <div class="top-bar px-4 py-2 border-bottom d-flex justify-content-between">
+      <app-filter (filterChanged)="setFilter($event)"></app-filter>
+      <button class="btn btn-primary btn-sm" (click)="openCreateNewModal()"><i class="bi bi-plus-lg"></i> Credential</button>
     </div>
-    <div class="pd-3">
-      <p *ngIf="isLoading">Loading...</p>
-      <app-credentials-list *ngIf="!isLoading"></app-credentials-list>
+    <div>
+      <div class="p-3" *ngIf="isLoading">Loading...</div>
+      <app-credentials-list [credentials]="credentials" *ngIf="!isLoading && credentials"></app-credentials-list>
+      <div class="p-3 no-credentials" *ngIf="!credentials">
+        No credentials to show
+      </div>
+
+      <div class="p-3 no-credentials" *ngIf="credentials && credentials.length === 0">
+        No credentials found
+      </div>
     </div>
 
   </div>

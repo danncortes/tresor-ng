@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CredentialForm, Field } from '../../models/credential.model';
 import { CredentialService } from '../../services/credential.service';
 import { UserService } from '../../services/user.service';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-new-credential-modal',
@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 export class CreateNewCredentialModalComponent implements OnDestroy {
 
   private subscriptions: Subscription[] = [];
+  public isSaving = false;
 
   constructor(
         public activeModal: NgbActiveModal,
@@ -38,9 +39,13 @@ export class CreateNewCredentialModalComponent implements OnDestroy {
   };
 
   public createCredential(): void {
+    this.isSaving = true;
+
     this.subscriptions.push(
       this.credentialService.createCredentials(this.newCredential).subscribe(() => {
         this.activeModal.close();
+      }, () => {
+        this.isSaving = false;
       })
     );
   }
@@ -49,5 +54,11 @@ export class CreateNewCredentialModalComponent implements OnDestroy {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
+  }
+
+  public get saveButtonDisabled(): boolean {
+    return this.isSaving ||
+        !this.newCredential.name ||
+        this.newCredential.data.every(field => field.name === '');
   }
 }

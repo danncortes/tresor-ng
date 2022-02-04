@@ -13,23 +13,7 @@
   }
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-
-  button {
-    background-color: rgba(0,0,0,0.08);
-    border: 0;
-    font-size: .9rem;
-    padding: 3px 12px;
-    border-radius: 100vh;
-    margin-right: .4rem;
-    margin-bottom: .4rem;
-    color: rgba(0,0,0,.5);
-
-    &.active {
-      background-color: $gray-500;
-      color: rgba(0,0,0,.7);
-    }
-  }
+.no-credentials {
+  text-align: center;
+  color: var(--gray);
 }
