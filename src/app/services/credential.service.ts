@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, filter, iif, map, Observable, of, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Subject } from 'rxjs';
 import { Credential, CredentialForm } from '../models/credential.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -15,21 +15,25 @@ export class CredentialService {
 
   public credentials$: BehaviorSubject<Credential[] | null> = new BehaviorSubject<Credential[] | null>(null);
   public filteredCredentials$: BehaviorSubject<Credential[] | null> = new BehaviorSubject<Credential[] | null>([]);
-
-  public credentialsPerVaultSummary: {[key: string]: number};
+  public filterBy$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public selectedTag$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public selectedVault$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  public credentialsPerVaultSummary: { [key: string]: number };
   public isLoading: boolean;
 
   constructor(public http: HttpClient, public userService: UserService) {
     combineLatest([
       this.credentials$,
-      this.userService.selectedVault$
-    ]).pipe(map(([credentials, selectedVault]): Credential[] | null => {
+      this.selectedVault$,
+      this.selectedTag$,
+      this.filterBy$
+    ]).pipe(map(([credentials, selectedVault, selectedTag, filterBy]): Credential[] | null => {
 
       let filteredCredentials: Credential[] = [];
 
       if (credentials && credentials.length === 0) {
         return null;
-      } else if(credentials) {
+      } else if (credentials) {
         filteredCredentials = credentials;
       }
 
@@ -39,26 +43,76 @@ export class CredentialService {
         });
       }
 
+      if (selectedTag.length) {
+        filteredCredentials = filteredCredentials.filter((credential: Credential) => {
+          return selectedTag.some(tag => credential.tags.includes(tag));
+        });
+      }
+
+      if (filterBy) {
+        filteredCredentials = filteredCredentials.filter((credential: Credential) => {
+          return credential.name.toLowerCase().includes(filterBy.toLowerCase());
+        });
+      }
+
       return filteredCredentials;
 
     })).subscribe((credentials) => {
       this.filteredCredentials$.next(credentials);
     });
+
+    this.selectedVault$.subscribe(vault => {
+      this.resetSelectedTags(vault);
+    });
   }
 
-  private buildCredentialsPerVaultSummary(vaults: Vault[], credentials: Credential[]): {[key: string]: number} {
-    const summary: {[key: string]: number} = {
+  get tagsByCredentials(): string[] {
+    const credentials = this.credentials$.value ? this.credentials$.value : [];
+    const filteredCredentials = this.selectedVault$.value ?
+      credentials.filter(credential => credential.vault === this.selectedVault$.value) :
+      credentials;
+
+    const tags: string[] = [];
+
+    filteredCredentials.forEach((credential: Credential) => {
+      tags.push(...credential.tags);
+    });
+
+    return [...new Set(tags)];
+  }
+
+  public resetSelectedTags(vault: string | null): void {
+    const credentials = this.credentials$.value?.filter(credential => credential.vault === vault);
+
+    const noRelatedTags = credentials && !this.selectedTag$.value.some(tag => credentials.some(cred => cred.tags.includes(tag)));
+    if (noRelatedTags) {
+      this.selectedTag$.next([]);
+    }
+  }
+
+  private buildCredentialsPerVaultSummary(vaults: Vault[], credentials: Credential[]): { [key: string]: number } {
+    const summary: { [key: string]: number } = {
     };
 
-    for(const vault of vaults) {
-      summary[`${vault._id}`] = 0;
+    for (const vault of vaults) {
+      if (vault._id) {
+        summary[vault._id] = 0;
+      }
     }
 
-    for(const credential of credentials) {
-      summary[`${credential.vault}`]++;
+    for (const credential of credentials) {
+      if (credential.vault) {
+        summary[credential.vault]++;
+      }
     }
 
     return summary;
+  }
+
+  public selectVault(vaultId: Vault['_id']) {
+    if(vaultId) {
+      this.selectedVault$.next(vaultId);
+    }
   }
 
   public getCredentials(): void {
@@ -76,7 +130,7 @@ export class CredentialService {
     this.isLoading = true;
 
     this.http.post<Credential>(`${apiUrl}/credential`, {
-      ...credential 
+      ...credential
     }).subscribe({
       next: (response: Credential) => {
         const credentials = this.credentials$.value ? this.credentials$.value : [];
@@ -92,7 +146,7 @@ export class CredentialService {
         req$.error('Error creating credential');
       }
     });
-        
+
     return req$;
   }
 

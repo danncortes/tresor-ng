@@ -8,8 +8,6 @@ const USER_KEY = 'auth-user';
 })
 export class TokenService {
 
-  constructor() { }
-
   public signOut(): void {
     window.sessionStorage.clear();
   }

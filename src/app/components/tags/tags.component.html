@@ -1,0 +1,13 @@
+<h4 class="title">
+    Tags
+</h4>
+<div class="tags">
+    <button
+            *ngFor="let tag of tags"
+            (click)="toggleTag(tag)"
+            [ngClass]="{'active': isTagActive(tag)}"
+    >
+        {{tag}}
+    </button>
+    <p class="no-tags mb-0" *ngIf="tags.length === 0">No tags to show</p>
+</div>

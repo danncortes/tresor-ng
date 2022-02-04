@@ -4,7 +4,7 @@ export const cryptData = (data: any, pass: string) => {
   return CryptoJS.AES.encrypt(data, `${pass}`).toString();
 };
 
-export const decryptData = (cryptedData: any, pass: string) => {
+export const decryptData = (cryptedData: string, pass: string) => {
   const bytes = CryptoJS.AES.decrypt(cryptedData, `${pass}`);
   return bytes.toString(CryptoJS.enc.Utf8);
 };

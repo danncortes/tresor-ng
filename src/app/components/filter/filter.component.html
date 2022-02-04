@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center">
+    <input
+    class="form-control form-control-sm"
+    placeholder="Type to filter"
+    type="text"
+    (ngModelChange)="emitValue($event)"
+    [(ngModel)]="filter"
+    >
+    <button
+    class="btn btn-sm"
+    type="button"
+    (click)="clearFilter()">
+        <i class="bi bi-x-circle"></i>
+    </button>
+</div>

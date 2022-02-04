@@ -1,8 +1,17 @@
 <div class="main-container">
   <div [ngClass]="{'login-container': isLoginRoute(), 'app-container': !isLoginRoute()}">
     <div class="card shadow">
-      <div class="card-header">
+      <div class="card-header px-3">
         <h5 class="mb-0">TRESOR</h5>
+        <div class="menu" *ngIf="showMenu">
+          <a class="mr-4" routerLink="dashboard" *ngIf="router.url !== '/dashboard'">Credentials</a>
+          <button class="mr-3">
+            <i class="bi bi-person"></i>
+          </button>
+          <button>
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </div>
       </div>
       <article class="card-body p-0">
         <router-outlet></router-outlet>

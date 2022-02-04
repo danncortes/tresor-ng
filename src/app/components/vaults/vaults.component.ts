@@ -26,7 +26,7 @@ export class VaultsComponent implements OnInit {
     return this.credentialService.credentials$.value !== null;
   }
 
-  public credentialNumber(vaultId: Vault['_id']): number {
-    return this.credentialService.credentialsPerVaultSummary[vaultId!];
+  public credentialNumber(vaultId: string): number {
+    return this.credentialService.credentialsPerVaultSummary[vaultId];
   }
 }

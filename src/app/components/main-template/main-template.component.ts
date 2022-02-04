@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,5 +14,9 @@ export class MainTemplateComponent {
 
   public isLoginRoute() {
     return this.router.url === '/login';
+  }
+
+  public get showMenu():boolean {
+    return this.router.url !== '/login';
   }
 }

@@ -30,6 +30,8 @@ import { CreateNewVaultModalComponent } from './components/create-new-vault-moda
 import { VaultsComponent } from './components/vaults/vaults.component';
 import { VaultListItemComponent } from './components/vault-list-item/vault-list-item.component';
 import { CredentialFieldComponent } from './components/credential-field/credential-field.component';
+import { FilterComponent } from './components/filter/filter.component';
+import { TagsComponent } from './components/tags/tags.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { CredentialFieldComponent } from './components/credential-field/credenti
     CreateNewVaultModalComponent,
     VaultsComponent,
     VaultListItemComponent,
-    CredentialFieldComponent
+    CredentialFieldComponent,
+    FilterComponent,
+    TagsComponent
   ],
   imports: [
     BrowserModule,

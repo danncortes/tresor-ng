@@ -4,6 +4,46 @@
 }
 
 .app-container {
-  width: min(100%, 800px);
+  width: min(100%, 900px);
   margin: auto;
 }
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .menu {
+    display: flex;
+    align-items: center;
+
+    a {
+      color: var(--gray-dark);
+      transition: color 500ms;
+
+      &:hover {
+        text-decoration: none;
+        color: cornflowerblue;
+      }
+    }
+
+    button {
+      padding: 0;
+      background: none;
+      border: 0;
+      line-height: 1rem;
+      height: 24px;
+
+      i.bi {
+        font-size: 1.5rem;
+        color: var(--gray);
+      }
+
+      &:hover i {
+        color: var(--gray-dark);
+      }
+    }
+  }
+}
+
+

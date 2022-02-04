@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Vault } from '../../models/user.model';
 
 @Component({
@@ -6,14 +6,9 @@ import { Vault } from '../../models/user.model';
   templateUrl: './vault-list-item.component.html',
   styleUrls: ['./vault-list-item.component.scss']
 })
-export class VaultListItemComponent implements OnInit {
+export class VaultListItemComponent {
 
   @Input() vault: Vault;
   @Input() credentialNumber: number;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

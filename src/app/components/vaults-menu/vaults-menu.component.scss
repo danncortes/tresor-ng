@@ -2,6 +2,17 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
+.header {
+  button.btn {
+    height: 2.3rem;
+  }
+
+  .bi {
+    font-size: 1rem;
+    color: var(--gray);
+  }
+}
+
 .vaults {
   li {
     button {
@@ -18,8 +29,6 @@
       &.active {
         background-color: $gray-400;
         color: rgba(0,0,0,.8);
-        outline: 1px solid rgba(0,0,0,0.06);;
-        outline-offset: -1px;
       }
     }
   }

@@ -1,14 +1,10 @@
-<div>
-
-</div>
-
 <ul *ngIf="isCredentialsFetch" class="list-group list-group-flush">
     <li
         app-vault-list-item
         class="list-group-item d-sm-flex justify-content-between align-items-center"
         *ngFor="let vault of vaults"
         [vault]="vault"
-        [credentialNumber]="this.credentialNumber(vault._id)"
+        [credentialNumber]="this.credentialNumber(vault._id!)"
     ></li>
 </ul>
 

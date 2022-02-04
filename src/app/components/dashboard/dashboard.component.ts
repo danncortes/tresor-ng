@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CredentialService } from '../../services/credential.service';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateNewCredentialModalComponent } from '../create-new-credential-modal/create-new-credential-modal.component';
+import { Credential } from '../../models/credential.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,9 +12,10 @@ import { CreateNewCredentialModalComponent } from '../create-new-credential-moda
 export class DashboardComponent implements OnInit {
 
   constructor(
-    public credentialService: CredentialService,
-    private modalService: NgbModal
-  ) { }
+        public credentialService: CredentialService,
+        private modalService: NgbModal
+  ) {
+  }
 
   ngOnInit(): void {
     this.credentialService.getCredentials();
@@ -23,11 +25,19 @@ export class DashboardComponent implements OnInit {
     return this.credentialService.isLoading;
   }
 
-  public openCreateNewModal():void {
-    const modalRef = this.modalService.open(CreateNewCredentialModalComponent, {
+  public get credentials(): Credential[] | null {
+    return this.credentialService.filteredCredentials$.value;
+  }
+
+  public openCreateNewModal(): void {
+    this.modalService.open(CreateNewCredentialModalComponent, {
       centered: true,
       scrollable: false,
-      size: 'lg' 
+      size: 'lg'
     });
+  }
+
+  public setFilter(value: string) {
+    this.credentialService.filterBy$.next(value);
   }
 }

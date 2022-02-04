@@ -12,7 +12,7 @@ export type Vault = {
 export interface BaseUser {
   name: string;
   verified: boolean;
-  tags: string[];
+  tags: {[key: string]: number};
   vaults: Vault[];
 }
 

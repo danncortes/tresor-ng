@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Field } from '../../models/credential.model';
 import { fieldTypes, FieldType } from '../../models/credential.model';
 
@@ -19,9 +19,6 @@ export class CredentialFormFieldComponent implements OnInit {
   name: FormControl;
   data: FormControl;
   type: FormControl;
-
-  constructor() {
-  }
 
   ngOnInit(): void {
     this.name = new FormControl(this.field.name, {
@@ -46,7 +43,9 @@ export class CredentialFormFieldComponent implements OnInit {
   }
 
   public get dataPlaceholder(): string {
-    return `Insert ${this.fieldForm.get('name')?.value || ''}`;
+    const nameField: AbstractControl | null = this.fieldForm.get('name');
+    const name: string = nameField ? nameField.value as string : '';
+    return `Insert ${name}`;
   }
 
   public get fieldTypes(): typeof fieldTypes {
