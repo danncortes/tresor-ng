@@ -9,7 +9,7 @@ import { LoginRegisterComponent } from './components/login-register/login-regist
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { MainTemplateComponent } from './components/main-template/main-template.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NoVerifiedComponent } from './components/no-verified/no-verified.component';
 import { VerifyComponent } from './components/verify/verify.component';
@@ -32,6 +32,14 @@ import { VaultListItemComponent } from './components/vault-list-item/vault-list-
 import { CredentialFieldComponent } from './components/credential-field/credential-field.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { TagsComponent } from './components/tags/tags.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PruebaModule } from './prueba/prueba.module';
+import { SharedModule } from './shared/shared.module';
+
+function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, 'http://localhost:8080/api/labels/', '');
+}
 
 @NgModule({
   declarations: [
@@ -67,7 +75,15 @@ import { TagsComponent } from './components/tags/tags.component';
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PruebaModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     {

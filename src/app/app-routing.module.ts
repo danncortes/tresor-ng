@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { VaultsComponent } from './components/vaults/vaults.component';
+import { PruebaModule } from './prueba/prueba.module';
 
 const routes: Routes = [
   {
@@ -20,11 +21,11 @@ const routes: Routes = [
     path: '',
     component: MainTemplateComponent,
     children: [
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [AuthGuard]
-      },
+      // {
+      //   path: 'dashboard',
+      //   component: DashboardComponent,
+      //   canActivate: [AuthGuard]
+      // },
       {
         path: 'vaults',
         component: VaultsComponent,
@@ -62,6 +63,10 @@ const routes: Routes = [
       {
         path: 'forgot-password',
         component: ForgotPasswordComponent
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => PruebaModule
       }
     ]
   }
