@@ -1,0 +1,39 @@
+$height: 36px;
+
+.toast-notification {
+  overflow: hidden;
+  height: $height;
+  font-size: 0.9rem;
+
+  &-status--closing {
+    height: 0;
+    transition: height .8s;
+  }
+
+  &--success {
+    background-color: lightgreen;
+    color: darkgreen;
+  }
+
+  &--info {
+    background-color: lightskyblue;
+    color: midnightblue;
+  }
+
+  &--warning {
+    background-color: orange;
+    color: darkred;
+  }
+
+  &--error {
+    background-color: indianred;
+    color: darkred;
+  }
+
+  &__content {
+    height: $height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

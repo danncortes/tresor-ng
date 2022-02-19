@@ -1,10 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { Subscription } from 'rxjs';
+
 import { CredentialForm, Field } from '../../models/credential.model';
 import { CredentialService } from '../../services/credential.service';
 import { UserService } from '../../services/user.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-create-new-credential-modal',
@@ -19,7 +21,8 @@ export class CreateNewCredentialModalComponent implements OnDestroy {
   constructor(
         public activeModal: NgbActiveModal,
         public credentialService: CredentialService,
-        public userService: UserService
+        public userService: UserService,
+        public toastService: ToastService
   ) {
   }
 
@@ -44,6 +47,7 @@ export class CreateNewCredentialModalComponent implements OnDestroy {
     this.subscriptions.push(
       this.credentialService.createCredentials(this.newCredential).subscribe(() => {
         this.activeModal.close();
+        this.toastService.notify('Credential created', 'success');
       }, () => {
         this.isSaving = false;
       })

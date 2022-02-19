@@ -32,6 +32,7 @@ import { VaultListItemComponent } from './components/vault-list-item/vault-list-
 import { CredentialFieldComponent } from './components/credential-field/credential-field.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { TagsComponent } from './components/tags/tags.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { TagsComponent } from './components/tags/tags.component';
     VaultListItemComponent,
     CredentialFieldComponent,
     FilterComponent,
-    TagsComponent
+    TagsComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
