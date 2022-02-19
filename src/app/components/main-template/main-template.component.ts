@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-main-template',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MainTemplateComponent {
 
-  constructor(public router: Router) {
+  constructor(public router: Router, public toastService: ToastService) {
 
   }
 
@@ -18,5 +19,9 @@ export class MainTemplateComponent {
 
   public get showMenu():boolean {
     return this.router.url !== '/login';
+  }
+
+  public get notifications() {
+    return this.toastService.notifications;
   }
 }

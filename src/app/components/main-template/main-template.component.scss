@@ -1,3 +1,7 @@
+.main-container__inner {
+  position: relative;
+}
+
 .login-container {
   width: min(100%, 500px);
   margin: auto;
@@ -46,4 +50,12 @@
   }
 }
 
+::ng-deep {
+  app-notifications {
+    position: absolute;
+    top: 49px;
+    left: 0;
+    right: 0;
+  }
+}
 
