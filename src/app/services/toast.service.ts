@@ -8,9 +8,13 @@ export class ToastService {
 
   public notifications: Notification[] = [];
 
-  public notify(message: string, type: Notification['type'], duration = 2000) {
-    const newNotification = new Notification(message, type, duration, 'active');
+  public notify(message: string, type: Notification['type'], duration = 2500) {
+    const newNotification = new Notification(message, type, duration, 'started');
     this.notifications.push(newNotification);
+
+    setTimeout(() => {
+      newNotification.status = 'active';
+    }, 0);
 
     setTimeout(() => {
       this.notifications = this.notifications.filter(notification => notification !== newNotification);

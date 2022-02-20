@@ -1,9 +1,12 @@
 import { Component, Input, AfterViewInit, ViewChild } from '@angular/core';
 import { Credential, Field } from '../../models/credential.model';
-import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapse, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { decryptDataObj } from '../../utils/cryptDecrypt';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { CredentialService } from '../../services/credential.service';
+import { ToastService } from '../../services/toast.service';
+import { ConfirmDeleteCredentialModalComponent } from '../../confirm-delete-credential-modal/confirm-delete-credential-modal.component';
 
 @Component({
   selector: 'app-credential-list-item',
@@ -12,15 +15,25 @@ import { switchMap } from 'rxjs/operators';
 })
 export class CredentialListItemComponent implements AfterViewInit {
 
+  constructor(
+      private credentialService: CredentialService,
+      private toast: ToastService,
+      public modalService: NgbModal
+  ) {
+  }
+
     @ViewChild('collapse') collapse: NgbCollapse;
     @Input() credential: Credential;
     public isCollapsed = true;
     public decryptedData: null | Field[];
+    public subscriptions: Subscription[] = [];
 
     ngAfterViewInit() {
-      this.collapse.hidden.subscribe(() => {
-        this.decryptedData = null;
-      });
+      this.subscriptions.push(
+        this.collapse.hidden.subscribe(() => {
+          this.decryptedData = null;
+        })
+      );
     }
 
     public toggleCollapse(): void {
@@ -32,14 +45,16 @@ export class CredentialListItemComponent implements AfterViewInit {
     }
 
     public open(): void {
-      this.decryptData().subscribe((data: Field[]) => {
-        this.decryptedData = data;
-        setTimeout(() => {
-          this.collapse.toggle(true);
-        }, 0);
-      }, error => {
-        console.log(error);
-      });
+      this.subscriptions.push(
+        this.decryptData().subscribe((data: Field[]) => {
+          this.decryptedData = data;
+          setTimeout(() => {
+            this.collapse.toggle(true);
+          }, 0);
+        }, error => {
+          console.log(error);
+        })
+      );
     }
 
     public close(): void {
@@ -60,5 +75,17 @@ export class CredentialListItemComponent implements AfterViewInit {
       });
     }
 
+    public deleteCredential(event: Event, id: Credential['_id']) {
+      event.stopPropagation();
 
+      const confirmDeleteCredentialModal = this.modalService.open(ConfirmDeleteCredentialModalComponent, {
+        centered: true,
+        scrollable: false,
+        size: 'md'
+      });
+
+      confirmDeleteCredentialModal.componentInstance.credential = this.credential;
+
+
+    }
 }

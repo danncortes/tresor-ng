@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Field } from '../../models/credential.model';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-credential-field, [app-credential-field]',
@@ -7,6 +8,9 @@ import { Field } from '../../models/credential.model';
   styleUrls: ['./credential-field.component.scss']
 })
 export class CredentialFieldComponent implements OnInit {
+
+  constructor(public toast: ToastService) {
+  }
 
     @Input() field: Field;
     public isDataVisible: boolean;
@@ -25,8 +29,7 @@ export class CredentialFieldComponent implements OnInit {
 
     public copyData(): void {
       void navigator.clipboard.writeText(`${this.field.data}`).then(() => {
-        // TODO show toast
-        console.log(`${this.field.name} copied!`);
+        this.toast.notify(`${this.field.name} copied!`, 'info', 2000);
       });
     }
 
