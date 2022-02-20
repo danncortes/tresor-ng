@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 import { Credential, CredentialForm } from '../models/credential.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -144,6 +144,22 @@ export class CredentialService {
       },
       error: () => {
         req$.error('Error creating credential');
+      }
+    });
+
+    return req$;
+  }
+  
+  public deleteCredential(id: Credential['_id']): Observable<Credential> {
+    const req$ = new Subject<Credential>();
+
+    this.http.delete<Credential>(`${apiUrl}/credential/${id}`).subscribe((res) => {
+      req$.next(res);
+
+      if(this.credentials$.value) {
+        this.credentials$.next(
+          this.credentials$.value.filter(credential => credential._id !== res._id)
+        );
       }
     });
 

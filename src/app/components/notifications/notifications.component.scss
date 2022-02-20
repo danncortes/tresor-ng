@@ -1,13 +1,17 @@
-$height: 36px;
+$height: 30px;
 
 .toast-notification {
   overflow: hidden;
   height: $height;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  transition: height .5s;
+
+  &-status--started {
+    height: 0;
+  }
 
   &-status--closing {
     height: 0;
-    transition: height .8s;
   }
 
   &--success {
