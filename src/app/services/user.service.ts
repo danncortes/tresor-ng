@@ -15,7 +15,11 @@ export class UserService {
 
   public user: User;
 
-  constructor(private http: HttpClient, public tokenService: TokenService, public router: Router) {
+  constructor(
+      private http: HttpClient,
+      public tokenService: TokenService,
+      public router: Router
+  ) {
   }
 
   public get vaults(): Vault[] {
@@ -27,22 +31,22 @@ export class UserService {
   }
 
   public login(authCredentials: AuthCredentials): Observable<any> {
-    const $req = new Subject<void>();
+    const req$ = new Subject<void>();
     this.http.post(`${apiUrl}/user/login`, authCredentials).subscribe((response: any) => {
       const { token } = response as { token: string };
       this.tokenService.saveToken(token);
       window.sessionStorage.setItem('masterp', authCredentials.masterPassword);
 
-      $req.next();
+      req$.next();
     },
     (err) => {
-      $req.error(err);
+      req$.error(err);
     });
-    return $req;
+    return req$;
   }
 
   public fetchUser(): Observable<any> {
-    const $req = new Subject();
+    const req$ = new Subject();
 
     this.http.get<User>(`${apiUrl}/user`).subscribe({
       next: (response: User ): void => {
@@ -50,13 +54,13 @@ export class UserService {
         this.user = {
           _id, name, email, verified, vaults, tags
         };
-        $req.next(this.user);
+        req$.next(this.user);
       },
       error: (err) => {
-        $req.error(err);
+        req$.error(err);
       }
     });
-    return $req;
+    return req$;
   }
 
   public saveUser(user: BaseUser): Observable<User> {
@@ -100,28 +104,52 @@ export class UserService {
     return req$;
   }
 
+  public deleteVault(vaultId: Vault['_id']): Observable<void> {
+    const req$ = new Subject<void>();
+
+    const newVaults = this.user.vaults.filter(vault => vault._id != vaultId);
+    const { _id, email, ...user } = this.user;
+    const newUser = {
+      ...user,
+      vaults: newVaults
+    };
+
+    this.saveUser(newUser).subscribe({
+      next: (user) => {
+
+        this.user = {
+          ...this.user,
+          vaults: newVaults
+        };
+        req$.next();
+      }
+    });
+
+    return req$;
+  }
+
   public canContinue(path: string): Observable<boolean> {
-    const $req = new Subject<boolean>();
+    const req$ = new Subject<boolean>();
 
     this.fetchUser().subscribe((res: User) => {
       const { verified } = res;
       const isAVerificationRoute = ['verify', 'no-verified'].includes(path);
       if (isAVerificationRoute && verified) {
         void this.router.navigateByUrl('');
-        $req.next(false);
+        req$.next(false);
       } else if (!isAVerificationRoute && !verified) {
         void this.router.navigateByUrl('no-verified');
-        $req.next(false);
+        req$.next(false);
       } else {
-        $req.next(true);
+        req$.next(true);
       }
     }, () => {
       this.tokenService.signOut();
       void this.router.navigateByUrl('/login');
-      $req.next(false);
+      req$.next(false);
     });
 
-    return $req;
+    return req$;
   }
 }
 
