@@ -18,7 +18,6 @@ export class CredentialService {
   public filterBy$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public selectedTag$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public selectedVault$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-  public credentialsPerVaultSummary: { [key: string]: number };
   public isLoading: boolean;
 
   constructor(public http: HttpClient, public userService: UserService) {
@@ -90,25 +89,6 @@ export class CredentialService {
     }
   }
 
-  private buildCredentialsPerVaultSummary(vaults: Vault[], credentials: Credential[]): { [key: string]: number } {
-    const summary: { [key: string]: number } = {
-    };
-
-    for (const vault of vaults) {
-      if (vault._id) {
-        summary[vault._id] = 0;
-      }
-    }
-
-    for (const credential of credentials) {
-      if (credential.vault) {
-        summary[credential.vault]++;
-      }
-    }
-
-    return summary;
-  }
-
   public selectVault(vaultId: Vault['_id']) {
     if(vaultId) {
       this.selectedVault$.next(vaultId);
@@ -119,7 +99,6 @@ export class CredentialService {
     this.isLoading = true;
     this.http.get<Credential[]>(`${apiUrl}/credentials`).subscribe((response: Credential[]) => {
       this.credentials$.next(response);
-      this.credentialsPerVaultSummary = this.buildCredentialsPerVaultSummary(this.userService.vaults, response);
       this.isLoading = false;
     });
   }

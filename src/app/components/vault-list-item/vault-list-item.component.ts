@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Vault } from '../../models/user.model';
 
 @Component({
@@ -10,5 +10,9 @@ export class VaultListItemComponent {
 
   @Input() vault: Vault;
   @Input() credentialNumber: number;
+  @Output() emitDeleteVault = new EventEmitter<void>();
 
+  public onCLickDeleteVault() {
+    this.emitDeleteVault.emit();
+  }
 }

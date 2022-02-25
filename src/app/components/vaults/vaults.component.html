@@ -5,6 +5,7 @@
         *ngFor="let vault of vaults"
         [vault]="vault"
         [credentialNumber]="this.credentialNumber(vault._id!)"
+        (emitDeleteVault)="deleteVault(vault._id!)"
     ></li>
 </ul>
 
