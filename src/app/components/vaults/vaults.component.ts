@@ -62,7 +62,7 @@ export class VaultsComponent implements OnInit {
 
   public deleteVault(vaultId: Vault['_id']): void {
     this.userService.deleteVault(vaultId).subscribe(() => {
-      this.toast.notify('Vault deleted', 'success', 100000);
+      this.toast.notify('Vault deleted', 'success');
     });
   }
 }

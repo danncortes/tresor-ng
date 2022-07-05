@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
-import { Credential, CredentialForm } from '../models/credential.model';
+import { Credential, CredentialCrypt, CredentialForm } from '../models/credential.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
@@ -90,7 +90,7 @@ export class CredentialService {
   }
 
   public selectVault(vaultId: Vault['_id']) {
-    if(vaultId) {
+    if (vaultId) {
       this.selectedVault$.next(vaultId);
     }
   }
@@ -128,17 +128,35 @@ export class CredentialService {
 
     return req$;
   }
-  
+
   public deleteCredential(id: Credential['_id']): Observable<Credential> {
     const req$ = new Subject<Credential>();
 
     this.http.delete<Credential>(`${apiUrl}/credential/${id}`).subscribe((res) => {
       req$.next(res);
 
-      if(this.credentials$.value) {
+      if (this.credentials$.value) {
         this.credentials$.next(
           this.credentials$.value.filter(credential => credential._id !== res._id)
         );
+      }
+    });
+
+    return req$;
+  }
+
+  public updateCredential(credential: CredentialForm): Observable<Credential> {
+    const req$ = new Subject<Credential>();
+
+    this.http.patch<Credential>(`${apiUrl}/credential/${credential._id!}`, credential).subscribe((credentialRes) => {
+      req$.next(credentialRes);
+
+      if (this.credentials$.value) {
+        const credentials = this.credentials$.value.filter(cred => cred._id !== credentialRes._id);
+        this.credentials$.next([
+          credentialRes,
+          ...credentials
+        ]);
       }
     });
 

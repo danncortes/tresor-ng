@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 
 import { CredentialForm, Field } from '../../models/credential.model';
 import { CredentialService } from '../../services/credential.service';
-import { UserService } from '../../services/user.service';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class CreateNewCredentialModalComponent implements OnDestroy {
   constructor(
         public activeModal: NgbActiveModal,
         public credentialService: CredentialService,
-        public userService: UserService,
         public toastService: ToastService
   ) {
   }

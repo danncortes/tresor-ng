@@ -11,7 +11,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './credential-form.component.html',
   styleUrls: ['./credential-form.component.scss']
 })
-export class CredentialFormComponent implements OnInit{
+export class CredentialFormComponent implements OnInit {
 
     @Input() credential: CredentialForm;
     @Output() credentialChange = new EventEmitter<CredentialForm>();
@@ -49,10 +49,10 @@ export class CredentialFormComponent implements OnInit{
     public get vaultDropdownLabel(): string {
       let label = 'None';
 
-      if(this.selectedVault$.value) {
+      if (this.selectedVault$.value) {
         const selectedVault = this.vaults.find(vault => vault._id === this.selectedVault$.value);
 
-        if(selectedVault) {
+        if (selectedVault) {
           label = selectedVault.label;
         }
       }

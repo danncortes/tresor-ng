@@ -26,7 +26,7 @@ export class CryptDecryptInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<Req>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const { method, url } = request;
 
-    if (method === 'POST' && url === `${apiUrl}/credential`) {
+    if (method === 'POST' && url === `${apiUrl}/credential` || method === 'PATCH' && url.includes(`${apiUrl}/credential/`)) {
       const masterp = request.headers.get('masterp');
 
       if (request.body && masterp) {
