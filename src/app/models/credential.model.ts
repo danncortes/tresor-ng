@@ -8,6 +8,7 @@ export interface CredentialBase {
 }
 
 export interface CredentialForm extends CredentialBase {
+  _id?:number;
   data: Field[];
 }
 

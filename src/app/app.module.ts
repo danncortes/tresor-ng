@@ -34,6 +34,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { TagsComponent } from './components/tags/tags.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ConfirmDeleteCredentialModalComponent } from './confirm-delete-credential-modal/confirm-delete-credential-modal.component';
+import { EditCredentialModalComponent } from './components/edit-credential-modal/edit-credential-modal.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ConfirmDeleteCredentialModalComponent } from './confirm-delete-credenti
     FilterComponent,
     TagsComponent,
     NotificationsComponent,
-    ConfirmDeleteCredentialModalComponent
+    ConfirmDeleteCredentialModalComponent,
+    EditCredentialModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,13 @@
-import { Component, Input, AfterViewInit, ViewChild } from '@angular/core';
-import { Credential, Field } from '../../models/credential.model';
-import { NgbCollapse, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { Credential, CredentialForm, Field } from '../../models/credential.model';
+import { NgbCollapse, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { decryptDataObj } from '../../utils/cryptDecrypt';
 import { Observable, of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { CredentialService } from '../../services/credential.service';
 import { ToastService } from '../../services/toast.service';
 import { ConfirmDeleteCredentialModalComponent } from '../../confirm-delete-credential-modal/confirm-delete-credential-modal.component';
+import { EditCredentialModalComponent } from '../edit-credential-modal/edit-credential-modal.component';
 
 @Component({
   selector: 'app-credential-list-item',
@@ -75,7 +76,7 @@ export class CredentialListItemComponent implements AfterViewInit {
       });
     }
 
-    public deleteCredential(event: Event, id: Credential['_id']) {
+    public deleteCredential(event: Event) {
       event.stopPropagation();
 
       const confirmDeleteCredentialModal = this.modalService.open(ConfirmDeleteCredentialModalComponent, {
@@ -85,7 +86,23 @@ export class CredentialListItemComponent implements AfterViewInit {
       });
 
       confirmDeleteCredentialModal.componentInstance.credential = this.credential;
+    }
 
+    public editCredential(event: Event) {
+      event.stopPropagation();
 
+      const editCredentialModal = this.modalService.open(EditCredentialModalComponent, {
+        centered: true,
+        scrollable: false,
+        size: 'lg'
+      });
+
+      const { vault, name, tags, _id } = this.credential;
+
+      this.decryptData().subscribe((data: Field[]) => {
+        editCredentialModal.componentInstance.credential = {
+          _id, vault, name, tags, data
+        };
+      });
     }
 }
